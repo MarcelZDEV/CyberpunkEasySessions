@@ -1,5 +1,5 @@
 <?php
-
+// tets
 // create file
 echo "Wpisz imię swojej postaci: ";
 $write_name = readline();
