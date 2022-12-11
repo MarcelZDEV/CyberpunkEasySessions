@@ -23,7 +23,7 @@ class Role
     public static function prettyRolesList()
     {
         foreach (self::$roles as $key => $role) {
-            echo "[$key] $role \n";
+            echo "[$key] - $role \n";
         }
     }
 }
@@ -157,15 +157,15 @@ class Lang
         ]
     ];
 
-    public static function langs(): array
+    public static function getLangs(): array
     {
         return self::$langs;
     }
 
-    public static function prettyLangsList()
+    public static function prettyRegionList()
     {
-        foreach (self::$langs as $key => $role) {
-            echo "[$key] $role\n";
+        foreach (self::$langs as $key => $lang) {
+            echo "[$key] - " . $lang['region'] . "\n";
         }
     }
 }
@@ -185,7 +185,7 @@ class Personality
         10 => "Przyjacielski i towarzyski"
     ];
 
-    public static function personality(): array
+    public static function getPersonality(): array
     {
         return self::$personality;
     }
