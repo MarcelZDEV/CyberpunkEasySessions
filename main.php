@@ -1,6 +1,17 @@
 <?php
 require_once 'src/Config.php';
 
+//Lang::prettyLangList();
+//exit();
+
+class ConstTMP
+{
+    const TMP_STD = "Wybierz numer";
+    function echoTMP(): string
+    {
+        return self::TMP_STD;
+    }
+}
 
 class CreateProcess
 {
@@ -9,6 +20,9 @@ class CreateProcess
     private string $writeName; // todo: tylko litery
     private $userFile;
 
+    /**
+     * @param $writeName
+     */
     function __construct($writeName)
     {
         if (ctype_alpha($writeName) === true) {
@@ -38,6 +52,18 @@ class CreateProcess
         echo sprintf(self::TMP_CHOSE, Lang::getLangs()[$regionId]['region'] . PHP_EOL);
         fwrite($this->userFile, 'Region: ' . Lang::getLangs()[$regionId]['region'] . "\n");
     }
+
+    function setOutfit($outfitId)
+    {
+        echo sprintf(self::TMP_CHOSE, Outfit::getOutfit()[$outfitId] . PHP_EOL);
+        echo fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getOutfit()[$outfitId] . "\n");
+    }
+
+    function setHair($hairId)
+    {
+        echo sprintf(self::TMP_CHOSE, Outfit::getHair()[$hairId] . PHP_EOL);
+        echo fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getHair()[$hairId] . "\n");
+    }
 }
 
 echo "Wpisz imię swojej postaci: ";
@@ -47,19 +73,31 @@ $obj = new CreateProcess($write_name);
 
 Role::prettyRolesList();
 
-echo "Wybierz numer roli: ";
+echo ConstTMP::TMP_STD . " roli: ";
 $selectRole = readline();
 $obj->setRole($selectRole);
 
 Lang::prettyRegionList();
 
-echo "Wybierz numer regionu: ";
+echo ConstTMP::TMP_STD . " regionu: ";
 $selectRegion = readline();
 $obj->setRegion($selectRegion);
 
 
 Personality::prettyPersonalityList();
 
-echo "Wybierz numer swojej osobowości: ";
+echo ConstTMP::TMP_STD . " swojej osobowości: ";
 $selectPersonality = readline();
 $obj->setPersonality($selectPersonality);
+
+Outfit::prettyOutfitList();
+
+echo ConstTMP::TMP_STD . " swojego stylu ubioru: ";
+$selectOutfit = readline();
+$obj->setOutfit($selectOutfit);
+
+Outfit::prettyHairList();
+
+echo ConstTMP::TMP_STD . " stylu swoich włosów";
+$selectHair = readline();
+$obj->setHair($selectHair);

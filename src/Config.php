@@ -15,11 +15,17 @@ class Role
         10 => "Nomada"
     ];
 
+    /**
+     * @return array|string[]
+     */
     public static function roles(): array
     {
         return self::$roles;
     }
 
+    /**
+     * @return void
+     */
     public static function prettyRolesList()
     {
         foreach (self::$roles as $key => $role) {
@@ -157,17 +163,31 @@ class Lang
         ]
     ];
 
+    /**
+     * @return array|array[]
+     */
     public static function getLangs(): array
     {
         return self::$langs;
     }
 
+    /**
+     * @return void
+     */
     public static function prettyRegionList()
     {
-        foreach (self::$langs as $key => $lang) {
-            echo "[$key] - " . $lang['region'] . "\n";
+        foreach (self::$langs as $key => $region) {
+            echo "[$key] - " . $region['region'] . "\n";
         }
     }
+
+    /*public static function prettyLangList()
+    {
+        foreach (self::$langs as $key => $lang) {
+            echo "[$key] - " . $lang['languages'] . "\n";
+            //print_r($lang['languages']);
+        }
+    }*/
 }
 
 class Personality
@@ -185,15 +205,87 @@ class Personality
         10 => "Przyjacielski i towarzyski"
     ];
 
+    /**
+     * @return array|string[]
+     */
     public static function getPersonality(): array
     {
         return self::$personality;
     }
 
+    /**
+     * @return void
+     */
     public static function prettyPersonalityList()
     {
         foreach (self::$personality as $key => $typeOfPersonality) {
             echo "[$key] $typeOfPersonality \n";
+        }
+    }
+}
+
+class Outfit
+{
+    private static array $outfit = [
+        1 => "Typowy Elegancki (standard, barwne, wieloelementowe)",
+        2 => "Sportowy (wygoda, mobliność, fitness)",
+        3 => "Styl Miejski (jaskrawe, technologiczne, uliczne)",
+        4 => "Biznesowe (przywództwo, charyzma, autorytet)",
+        5 => "Krzyk Mody (wyjątkowe, dizajnerskie, haute couture)",
+        6 => "Artystyczne (folkowe, retro, wolny duch)",
+        7 => "Moda Kloszardowa (bezdomni, bylejakość, styl włóczęgi)",
+        8 => "Kolory Gangu (niebezpieczeństwo, przemoc, bunt)",
+        9 => "Skóry Nomady (western, dzicz, plemienne)",
+        10 => "Azjatycki Pop (jasne, przypominające kostium, młodzieżowe)"
+    ];
+
+    private static array $hair = [
+        1 => "Irokez",
+        2 => "Długie i mysie",
+        3 => "Krótkie i sterczące",
+        4 => "Potargane",
+        5 => "Brak",
+        6 => "Pasemka",
+        7 => "Tęcza kolorów",
+        8 => "Krótkie i schludne",
+        9 => "Krótkie i kręcone",
+        10 => "Długie i proste"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getOutfit(): array
+    {
+        return self::$outfit;
+    }
+
+    /**
+     * @return void
+     */
+    public static function prettyOutfitList()
+    {
+        foreach (self::$outfit as $key => $typeOfOutfit) {
+            echo "[$key] - " . "$typeOfOutfit" . "\n";
+        }
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function getHair(): array
+    {
+        return self::$hair;
+    }
+
+    /**
+     * @return void
+     */
+    public static function prettyHairList()
+    {
+        foreach (self::$outfit as $key => $typeOfHair) {
+            echo "[$key] - " . "$typeOfHair" . "\n";
         }
     }
 }
