@@ -56,13 +56,28 @@ class CreateProcess
     function setOutfit($outfitId)
     {
         echo sprintf(self::TMP_CHOSE, Outfit::getOutfit()[$outfitId] . PHP_EOL);
-        echo fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getOutfit()[$outfitId] . "\n");
+        fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getOutfit()[$outfitId] . "\n");
     }
 
     function setHair($hairId)
     {
         echo sprintf(self::TMP_CHOSE, Outfit::getHair()[$hairId] . PHP_EOL);
-        echo fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getHair()[$hairId] . "\n");
+        fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getHair()[$hairId] . "\n");
+    }
+
+    function setSpecialSing($specialSingID) {
+        echo sprintf(self::TMP_CHOSE, SpecialSigns::getSpecialSings()[$specialSingID] . PHP_EOL);
+        fwrite($this->userFile, 'Znak szczególny: ' . SpecialSigns::getSpecialSings()[$specialSingID] . "\n");
+    }
+
+    function setValueTheMost($valueTheMostId) {
+        echo sprintf(self::TMP_CHOSE, MotivationRelations::getValueTheMost()[$valueTheMostId] . PHP_EOL);
+        fwrite($this->userFile, 'Co cenisz najbardziej: ' . MotivationRelations::getValueTheMost()[$valueTheMostId] . "\n");
+    }
+
+    function setThinkAboutPeople($thinkAboutPeopleId) {
+        echo sprintf(self::TMP_CHOSE, MotivationRelations::getThinkAboutPeople()[$thinkAboutPeopleId] . PHP_EOL);
+        fwrite($this->userFile, 'Co zwykle sądzisz o ludziach: ' . MotivationRelations::getThinkAboutPeople()[$thinkAboutPeopleId] . "\n");
     }
 }
 
@@ -98,6 +113,24 @@ $obj->setOutfit($selectOutfit);
 
 Outfit::prettyHairList();
 
-echo ConstTMP::TMP_STD . " stylu swoich włosów";
+echo ConstTMP::TMP_STD . " stylu swoich włosów: ";
 $selectHair = readline();
 $obj->setHair($selectHair);
+
+SpecialSigns::prettySpecialSingsList();
+
+echo ConstTMP::TMP_STD . " swojego znaku szczególnego: ";
+$selectSpecialSing = readline();
+$obj->setSpecialSing($selectSpecialSing);
+
+MotivationRelations::prettyValueTheMostList();
+
+echo ConstTMP::TMP_STD . " tego czego cenisz najbardziej: ";
+$selectValueTheMost = readline();
+$obj->setValueTheMost($selectValueTheMost);
+
+MotivationRelations::prettyThinkAboutPeopleList();
+
+echo ConstTMP::TMP_STD . " tego czego zwykle sądzisz o ludziach: ";
+$selectThinkAboutPeople = readline();
+$obj->setThinkAboutPeople($selectThinkAboutPeople);

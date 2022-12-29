@@ -289,3 +289,93 @@ class Outfit
         }
     }
 }
+
+class SpecialSigns
+{
+    static private array $specialSings = [
+        1 => "Tatuaże",
+        2 => "Lustrzanki",
+        3 => "Blizny rytualne",
+        4 => "Ćwiekowane rękawice",
+        5 => "Kolczyki w nosie",
+        6 => "Kolczyki w języku lub gdzieś indziej",
+        7 => "Dziwne implanty paznokciowe",
+        8 => "Ćwiekowane buciory lub szpilki",
+        9 => "Rękawiczki bez palców",
+        10 => "Dziwne szkła kontaktowe"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getSpecialSings(): array
+    {
+        return self::$specialSings;
+    }
+
+    public static function prettySpecialSingsList()
+    {
+        foreach (self::$specialSings as $key => $typeOfSpecialSings) {
+            echo "[$key] - $typeOfSpecialSings" . "\n";
+        }
+    }
+}
+
+class MotivationRelations
+{
+    static private array $valueTheMost = [
+        1 => "Pieniądze",
+        2 => "Honor",
+        3 => "Swoje słowo",
+        4 => "Uczciwość",
+        5 => "Wiedzę",
+        6 => "Zemstę",
+        7 => "Miłość",
+        8 => "Władzę",
+        9 => "Rodzinę",
+        10 => "Przyjaźń"
+    ];
+
+    static private array $thinkAboutPeople = [
+        1 => "Nie wtrącam się",
+        2 => "Nie wtrącam się",
+        3 => "Lubię prawie wszystkich",
+        4 => "Nienawidzę praktycznie wszystkich",
+        5 => "Ludzie to narzędzia. Wykorzystaj ich do własnych celów i porzuć",
+        6 => "Każda osoba jest ważna",
+        7 => "Ludzie to przeszkody, które się niszczy, jeśli stoją mi na drodze",
+        8 => "Nikomu nie można ufać. Nie można od nikogo zależeć",
+        9 => "Zniszcz wszystkich i pozwól, by karaluchy przejęły władzę nad światem",
+        10 => "Ludzie są cudowni!"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getValueTheMost(): array
+    {
+        return self::$valueTheMost;
+    }
+
+    public static function prettyValueTheMostList()
+    {
+        foreach (self::$valueTheMost as $key => $typeOfValueTheMost) {
+            echo "[$key] - $typeOfValueTheMost" . "\n";
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public static function getThinkAboutPeople(): array
+    {
+        return self::$thinkAboutPeople;
+    }
+
+    public static function prettyThinkAboutPeopleList()
+    {
+        foreach (self::$thinkAboutPeople as $key => $typeOfThinkAboutPeople) {
+            echo "[$key] - $typeOfThinkAboutPeople" . "/n";
+        }
+    }
+}
