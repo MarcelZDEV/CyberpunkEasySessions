@@ -1,5 +1,30 @@
 <?php
 
+class Menu
+{
+    private static array $menu = [
+        1 => "Stwórz postać"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getMenu(): array
+    {
+        return self::$menu;
+    }
+
+    /**
+     * @return void
+     */
+    public static function prettyMenuList()
+    {
+        foreach (self::$menu as $key => $menu) {
+            echo "[$key] - $menu \n";
+        }
+    }
+}
+
 class Role
 {
     private static array $roles = [
@@ -18,7 +43,7 @@ class Role
     /**
      * @return array|string[]
      */
-    public static function roles(): array
+    public static function getRoles(): array
     {
         return self::$roles;
     }
@@ -181,13 +206,12 @@ class Lang
         }
     }
 
-    /*public static function prettyLangList()
+    public static function prettyLangListForRegion(int $regionKey)
     {
-        foreach (self::$langs as $key => $lang) {
-            echo "[$key] - " . $lang['languages'] . "\n";
-            //print_r($lang['languages']);
+        foreach (self::$langs[$regionKey]['languages'] as $key => $lang) {
+            echo "[$key] - " . $lang . "\n";
         }
-    }*/
+    }
 }
 
 class Personality
@@ -219,7 +243,7 @@ class Personality
     public static function prettyPersonalityList()
     {
         foreach (self::$personality as $key => $typeOfPersonality) {
-            echo "[$key] $typeOfPersonality \n";
+            echo "[$key]  - $typeOfPersonality \n";
         }
     }
 }
@@ -375,7 +399,132 @@ class MotivationRelations
     public static function prettyThinkAboutPeopleList()
     {
         foreach (self::$thinkAboutPeople as $key => $typeOfThinkAboutPeople) {
-            echo "[$key] - $typeOfThinkAboutPeople" . "/n";
+            echo "[$key] - $typeOfThinkAboutPeople" . "\n";
+        }
+    }
+}
+
+class MostImportantPerson
+{
+    private static array $mostImportantPerson = [
+        1 => "Rodzic",
+        2 => "Brat lub siostra",
+        3 => "Kochanek lub kochanka",
+        4 => "Przyjaciel",
+        5 => "Ty",
+        6 => "Zwierzę domowe",
+        7 => "Nauczyciel lub mentor",
+        8 => "Osoba publiczna",
+        9 => "Osobisty bohater",
+        10 => "Nikt"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getMostImportantPerson(): array
+    {
+        return self::$mostImportantPerson;
+    }
+
+    public static function prettyMostImportantPersonList()
+    {
+        foreach (self::$mostImportantPerson as $key => $person) {
+            echo "[$key] - $person" . "\n";
+        }
+    }
+}
+
+class MostImportantThing
+{
+    private static array $mostImportantThing = [
+        1 => "Broń",
+        2 => "Narzędzie",
+        3 => "Ubranie",
+        4 => "Zdjęcie",
+        5 => "Książka lub pamiętnik",
+        6 => "Nagranie",
+        7 => "Instrument muzyczny",
+        8 => "Biżuteria",
+        9 => "Zabawka",
+        10 => "List"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getMostImportantThing(): array
+    {
+        return self::$mostImportantThing;
+    }
+
+    public static function prettyMostImportantThingList()
+    {
+        foreach (self::$mostImportantThing as $key => $thing) {
+            echo "[$key] - $thing" . "\n";
+        }
+    }
+}
+
+class BackgroundFamily
+{
+    private static array $backgroundFamily = [
+        1 => "Szefowie Korporacji - Bogaci, wpływowi, ze służbą, luksusowymi domami i wszystkim, co najlepsze.
+                            Prywatna ochrona dokładała starań, byś zawsze był bezpieczny. 
+                            Uczęszczałeś do znanej szkoły prywatnej" . "\n",
+
+        2 => "Menadżerowie Korporacji - Duże zarobki, duży dom w bezpiecznej okolicy, dobre samochody itp.
+                                Czasami rodzice (lub rodzic) najmowali służbę, choć niezbyt często.
+                                Uczyłeś w się w szkołach prywatnych i korporacyjnych" . "\n",
+
+        3 => "Technicy Korporacji - Klasa średnia-średnia, mieszkająca w konapach lub Bobrowisku.
+                            Wygodny domek jednorodzinny, minivany i technikum Korporacyjne. Trochę jak
+                            mieszanka Ameryki lat 50. XX wieku i rzeczywistości orwellowskiej" . "\n",
+
+        4 => "Wataha Nomadów - Wychowałeś się w poobijanych przyczepach, samochodach i wielkich kombiwozach.
+                       Już za młodu nauczyłeś się prowadzić auta i walczyć, ale rodzina zawsze była
+                       gotowa ci pomóc. Jedzenia zwykle było w bród i było nawet świeże. Uczyłeś się od
+                       rodziców i innych członków rodziny" . "\n",
+
+        5 => "Gangowa „rodzina” - Okrutny, pełen przemocy dom tam, gdzie twój gang akurat panował.
+                          Zwykle byłeś głodny, zmarznięty i przerażony. Zapewne nie znałeś prawdziwych
+                          rodziców. Edukacja? Gang nauczył cię, jak walczyć, kraść i zabijać – chyba nic
+                          więcej nie musisz wiedzieć?" . "\n",
+
+        6 => "Mieszkańcy Strefy Walki - Trochę lepiej niż gang, ale twój dom był ledwo stojącym, ufortyfikowanym
+                                budynkiem gdzieś w „Strefie”. Czasem głód zaglądał ci w oczy, ale zwykle raczej
+                                miałeś gdzie spać i co jeść. Edukacja domowa" . "\n",
+
+        7 => "Miejscy bezdomni - Mieszkałeś w samochodach, śmietnikach i opuszczonych modułach transportowych.
+                         Jeśli miałeś szczęście. Zwykle byłeś głodny, zmarznięty i przerażony, chyba że
+                         zebrałeś się na odwagę, by walczyć o resztki. Edukacja? W szkole życia" . "\n",
+
+        8 => "Szczury z megabudowli - Dorastałeś w jednej z nowych megabudowli, które powstały po wojnie. Malutki konap,
+                              karma i jednokomórkowe organiczne proteiny, ciepły kąt do spania. Lepiej wykształceni
+                              mieszkańcy kopca lub miejscowa Korporacja mogli nawet prowadzić szkołę" . "\n",
+
+        9 => "Osadnicy - Zacząłeś na drodze, ale potem zajęliście opuszczone miasteczko lub miasto, z zamiarem
+                 odbudowy. Życie pionierów jest niebezpieczne, ale nie było problemów z jedzeniem
+                 i bezpiecznym miejscem do spania. Uczyli cię rodzice – jeśli mieli na to czas" . "\n",
+
+        10 => "Krawędziarze - Twój dom był tam, gdzie twoi rodzice akurat mieli zlecenie. Luksusowy apartament,
+                      konap w jakimś mieście – albo śmietnik, jeśli akurat uciekaliście.
+                      Podobnie z wiktem i opierunkiem – raz gourmet, a raz karma"
+    ];
+
+    /**
+     * @return array
+     */
+    public static function getBackgroundFamily(): array
+    {
+        return self::$backgroundFamily;
+    }
+
+    public static function prettyBackgroundFamilyList()
+    {
+        foreach (self::getBackgroundFamily() as $key => $background)
+        {
+            echo "[$key] - $background" . "\n";
         }
     }
 }

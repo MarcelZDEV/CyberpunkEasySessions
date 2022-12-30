@@ -1,21 +1,15 @@
 <?php
-require_once 'src/Config.php';
+require_once 'Config.php';
 
-//Lang::prettyLangList();
-//exit();
 
 class ConstTMP
 {
     const TMP_STD = "Wybierz numer";
-    function echoTMP(): string
-    {
-        return self::TMP_STD;
-    }
 }
 
-class CreateProcess
+class CreateProcess2
 {
-    const TMP_CHOSE = "Wybrałeś %s!";
+    const TMP_CHOSE = "Wybrałeś %s" . "\n";
 
     private string $writeName; // todo: tylko litery
     private $userFile;
@@ -36,9 +30,8 @@ class CreateProcess
 
     function setRole($roleId)
     {
-        echo sprintf(self::TMP_CHOSE, Role::roles()[$roleId]) . PHP_EOL;
-
-        fwrite($this->userFile, 'Rola: ' . Role::roles()[$roleId] . "\n");
+        echo sprintf(self::TMP_CHOSE, Role::getRoles()[$roleId]);
+        fwrite($this->userFile, 'Rola: ' . Role::getRoles()[$roleId] . "\n");
     }
 
     function setPersonality($personalityId)
@@ -53,6 +46,12 @@ class CreateProcess
         fwrite($this->userFile, 'Region: ' . Lang::getLangs()[$regionId]['region'] . "\n");
     }
 
+    function setLang($langId)
+    {
+        echo sprintf(self::TMP_CHOSE, Lang::getLangs()[$langId]['languages'][$langId] . PHP_EOL);
+        fwrite($this->userFile, 'Język: ' . Lang::getLangs()[$langId]['languages'][$langId] . "\n");
+    }
+
     function setOutfit($outfitId)
     {
         echo sprintf(self::TMP_CHOSE, Outfit::getOutfit()[$outfitId] . PHP_EOL);
@@ -65,26 +64,47 @@ class CreateProcess
         fwrite($this->userFile, 'Styl ubioru: ' . Outfit::getHair()[$hairId] . "\n");
     }
 
-    function setSpecialSing($specialSingID) {
+    function setSpecialSing($specialSingID)
+    {
         echo sprintf(self::TMP_CHOSE, SpecialSigns::getSpecialSings()[$specialSingID] . PHP_EOL);
         fwrite($this->userFile, 'Znak szczególny: ' . SpecialSigns::getSpecialSings()[$specialSingID] . "\n");
     }
 
-    function setValueTheMost($valueTheMostId) {
+    function setValueTheMost($valueTheMostId)
+    {
         echo sprintf(self::TMP_CHOSE, MotivationRelations::getValueTheMost()[$valueTheMostId] . PHP_EOL);
         fwrite($this->userFile, 'Co cenisz najbardziej: ' . MotivationRelations::getValueTheMost()[$valueTheMostId] . "\n");
     }
 
-    function setThinkAboutPeople($thinkAboutPeopleId) {
+    function setThinkAboutPeople($thinkAboutPeopleId)
+    {
         echo sprintf(self::TMP_CHOSE, MotivationRelations::getThinkAboutPeople()[$thinkAboutPeopleId] . PHP_EOL);
         fwrite($this->userFile, 'Co zwykle sądzisz o ludziach: ' . MotivationRelations::getThinkAboutPeople()[$thinkAboutPeopleId] . "\n");
+    }
+
+    function setMostImportantPerson($mostImportantPersonId)
+    {
+        echo sprintf(self::TMP_CHOSE, MostImportantPerson::getMostImportantPerson()[$mostImportantPersonId] . PHP_EOL);
+        fwrite($this->userFile, 'Najważniejsza osoba w twoim życiu: ' . MostImportantPerson::getMostImportantPerson()[$mostImportantPersonId] . "\n");
+    }
+
+    function setMostImportantThing($mostImportantThingId)
+    {
+        echo sprintf(self::TMP_CHOSE, MostImportantThing::getMostImportantThing()[$mostImportantThingId] . PHP_EOL);
+        fwrite($this->userFile, 'Najważniejszy przedmiot: ' . MostImportantThing::getMostImportantThing()[$mostImportantThingId] . "\n");
+    }
+
+    function setBackgroundFamily($backgroundFamilyID)
+    {
+        echo sprintf(self::TMP_CHOSE, BackgroundFamily::getBackgroundFamily()[$backgroundFamilyID] . PHP_EOL);
+        fwrite($this->userFile, 'Tło rodzinne: ' . BackgroundFamily::getBackgroundFamily()[$backgroundFamilyID] . "\n");
     }
 }
 
 echo "Wpisz imię swojej postaci: ";
 $write_name = readline();
 
-$obj = new CreateProcess($write_name);
+$obj = new CreateProcess2($write_name);
 
 Role::prettyRolesList();
 
@@ -97,6 +117,12 @@ Lang::prettyRegionList();
 echo ConstTMP::TMP_STD . " regionu: ";
 $selectRegion = readline();
 $obj->setRegion($selectRegion);
+
+Lang::prettyLangListForRegion($selectRegion);
+
+echo ConstTMP::TMP_STD . " języka: ";
+$selectLang = readline();
+$obj->setLang($selectLang);
 
 
 Personality::prettyPersonalityList();
@@ -134,3 +160,21 @@ MotivationRelations::prettyThinkAboutPeopleList();
 echo ConstTMP::TMP_STD . " tego czego zwykle sądzisz o ludziach: ";
 $selectThinkAboutPeople = readline();
 $obj->setThinkAboutPeople($selectThinkAboutPeople);
+
+MostImportantPerson::prettyMostImportantPersonList();
+
+echo ConstTMP::TMP_STD . " najważniejszej osoby w twoim życiu: ";
+$selectMostImportantPerson = readline();
+$obj->setMostImportantPerson($selectMostImportantPerson);
+
+MostImportantThing::prettyMostImportantThingList();
+
+echo ConstTMP::TMP_STD . " najważniejszego przedmiotu: ";
+$selectMostImportantThing = readline();
+$obj->setMostImportantThing($selectMostImportantThing);
+
+BackgroundFamily::prettyBackgroundFamilyList();
+
+echo ConstTMP::TMP_STD . " tła rodzinnego: ";
+$selectBackgroundFamily = readline();
+$obj->setBackgroundFamily($selectBackgroundFamily);
